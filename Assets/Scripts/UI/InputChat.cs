@@ -1,12 +1,16 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Netcode;
 
-public class PlayerChat : MonoBehaviour
+public class InputChat : NetworkBehaviour
 {
     [SerializeField] private GameObject chatPanel;
     [SerializeField] private TMP_InputField inputText;
     [SerializeField] private Button sendBtn;
+
+    private Transform target;
+    private PlayerChat playerChat;
 
     private bool isChatActive = false;
 
@@ -14,10 +18,14 @@ public class PlayerChat : MonoBehaviour
     {
         chatPanel.SetActive(false);
         sendBtn.onClick.AddListener(SendChatMessage);
+
+        AssignLocalPlayerAsTarget();
     }
 
     void Update()
     {
+        if (!IsOwner) return;
+
         if (Input.GetKeyDown(KeyCode.Return))
         {
             if (isChatActive)
@@ -46,9 +54,33 @@ public class PlayerChat : MonoBehaviour
     {
         string message = inputText.text;
         inputText.text = string.Empty;
-        Debug.Log($"Sending message: {message}");
+
+        if (playerChat != null)
+        {
+            Debug.Log($"Sending message: {message}");
+            playerChat.SpawnChatBubble(message);
+        }
 
         chatPanel.SetActive(false);
         isChatActive = false;
+    }
+
+    private void AssignLocalPlayerAsTarget()
+    {
+        if (NetworkManager.Singleton.LocalClient != null && NetworkManager.Singleton.LocalClient.PlayerObject != null)
+        {
+            target = NetworkManager.Singleton.LocalClient.PlayerObject.transform;
+
+            playerChat = target.GetComponent<PlayerChat>();
+
+            if (playerChat == null)
+            {
+                Debug.LogError("PlayerChat component not found on the local player object!");
+            }
+        }
+        else
+        {
+            Invoke(nameof(AssignLocalPlayerAsTarget), 0.5f);
+        }
     }
 }
