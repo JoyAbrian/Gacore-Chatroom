@@ -31,7 +31,6 @@ public class CameraFollow : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Local player object not found. Retrying...");
             Invoke(nameof(AssignLocalPlayerAsTarget), 0.5f);
         }
     }
