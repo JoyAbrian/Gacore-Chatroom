@@ -78,7 +78,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31de6f407985d6b42853ae2cbb5c8148, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3048609637164665326}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31de6f407985d6b42853ae2cbb5c8148, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4749603633868714912}
   m_SourcePrefab: {fileID: 100100000, guid: 31de6f407985d6b42853ae2cbb5c8148, type: 3}
+--- !u!95 &1980018624884166515 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 31de6f407985d6b42853ae2cbb5c8148, type: 3}
+  m_PrefabInstance: {fileID: 5337018287649747682}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5103013831646203827 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 31de6f407985d6b42853ae2cbb5c8148, type: 3}
@@ -214,3 +222,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chatBubblePrefab: {fileID: 2529747427836485156, guid: b9df03d6913e38e4bb0151e1cfa38526, type: 3}
   offset: {x: 0, y: 4, z: -0.5}
+--- !u!114 &4749603633868714912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5103013831646203827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8deae8091111f4eb30a56c1f4e0d3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 1980018624884166515}
