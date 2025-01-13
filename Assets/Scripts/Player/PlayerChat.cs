@@ -11,8 +11,8 @@ public class PlayerChat : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        GameObject newChatBubble = Instantiate(chatBubblePrefab, gameObject.transform.position + offset, Quaternion.identity);
-        newChatBubble.transform.SetParent(gameObject.transform);
+        GameObject newChatBubble = Instantiate(chatBubblePrefab, transform.position + offset, Quaternion.identity);
+        newChatBubble.transform.SetParent(transform);
         newChatBubble.transform.localPosition = offset;
 
         TMP_Text chatText = newChatBubble.GetComponentInChildren<TMP_Text>();
@@ -21,6 +21,6 @@ public class PlayerChat : NetworkBehaviour
             chatText.text = message;
         }
 
-        //Destroy(newChatBubble, 5f);
+        Destroy(newChatBubble, 5f);
     }
 }

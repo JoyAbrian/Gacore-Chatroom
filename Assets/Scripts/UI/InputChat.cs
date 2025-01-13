@@ -57,7 +57,6 @@ public class InputChat : NetworkBehaviour
 
         if (playerChat != null)
         {
-            Debug.Log($"Sending message: {message}");
             playerChat.SpawnChatBubble(message);
         }
 
