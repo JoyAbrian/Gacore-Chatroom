@@ -1,8 +1,9 @@
+using Unity.Netcode;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
-public class Movement : MonoBehaviour
+public class CharacterMovement : NetworkBehaviour
 {
     [SerializeField] private float speed = 5f;
     [SerializeField] private float rotationSpeed = 720f;
@@ -17,10 +18,18 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         rb.freezeRotation = true;
+
+        if (!IsOwner)
+        {
+            enabled = false;
+            return;
+        }
     }
 
     void Update()
     {
+        if (!IsOwner) return;
+
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         movementDirection = new Vector3(horizontal, 0, vertical).normalized;
