@@ -10,10 +10,7 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
-        if (NetworkManager.Singleton.LocalClient != null && NetworkManager.Singleton.LocalClient.PlayerObject != null)
-        {
-            target = NetworkManager.Singleton.LocalClient.PlayerObject.transform;
-        }
+        AssignLocalPlayerAsTarget();
     }
 
     void LateUpdate()
@@ -24,5 +21,18 @@ public class CameraFollow : MonoBehaviour
 
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
         transform.position = smoothedPosition;
+    }
+
+    private void AssignLocalPlayerAsTarget()
+    {
+        if (NetworkManager.Singleton.LocalClient != null && NetworkManager.Singleton.LocalClient.PlayerObject != null)
+        {
+            target = NetworkManager.Singleton.LocalClient.PlayerObject.transform;
+        }
+        else
+        {
+            Debug.LogWarning("Local player object not found. Retrying...");
+            Invoke(nameof(AssignLocalPlayerAsTarget), 0.5f);
+        }
     }
 }
