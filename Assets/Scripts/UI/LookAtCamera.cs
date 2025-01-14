@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ChatBubble : MonoBehaviour
+public class LookAtCamera : MonoBehaviour
 {
     private Transform cameraTransform;
 
